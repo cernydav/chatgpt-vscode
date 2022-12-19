@@ -1,13 +1,13 @@
 {
-  "name": "chatgpt",
-  "displayName": "ChatGPT: write and improve code using AI",
-  "description": "Use ChatGPT right inside the IDE to enhance and automate your coding with AI-powered assistance (unofficial)",
+  "name": "gptcode",
+  "displayName": "gptcode: write and improve code using AI",
+  "description": "gptcode",
   "version": "0.5.1",
-  "publisher": "timkmecl",
+  "publisher": "cernydav",
   "icon": "resources/extensionIcon.png",
   "license": "MIT",
   "repository": {
-    "url": "https://github.com/timkmecl/chatgpt-vscode"
+    "url": "https://github.com/timkmecl/gptcode-vscode"
   },
   "engines": {
     "vscode": "^1.73.0"
@@ -16,7 +16,7 @@
     "Other"
   ],
   "keywords": [
-    "chatgpt",
+    "gptcode",
     "openai",
     "gpt3",
     "copilot",
@@ -27,185 +27,290 @@
     "refactor"
   ],
   "activationEvents": [
-    "onView:chatgpt.chatView",
-    "onCommand:chatgpt.ask",
-    "onCommand:chatgpt.explain",
-    "onCommand:chatgpt.refactor",
-    "onCommand:chatgpt.optimize",
-    "onCommand:chatgpt.problems"
+    "onView:gptcode.chatView",
+    "onCommand:gptcode.ask",
+    "onCommand:gptcode.explain",
+    "onCommand:gptcode.refactor",
+    "onCommand:gptcode.optimize",
+    "onCommand:gptcode.problems",
+    "onCommand:gptcode.replaceSelectedDescription",
+    "onCommand:gptcode.writeTest"
   ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "chatgpt.ask",
-        "title": "Ask ChatGPT"
+        "command": "gptcode.ask",
+        "title": "Ask gptcode"
       },
       {
-        "command": "chatgpt.explain",
-        "title": "ChatGPT: Explain selection"
+        "command": "gptcode.explain",
+        "title": "gptcode: Explain selection"
+      },
+
+      {
+        "command": "gptcode.replaceSelectedDescription",
+        "title": "gptcode: replaceSelectedDescription selection"
+      },
+
+      {
+        "command": "gptcode.writeTest",
+        "title": "gptcode: writeTest selection"
+      },
+
+      {
+        "command": "gptcode.refactor",
+        "title": "gptcode: Refactor selection"
       },
       {
-        "command": "chatgpt.refactor",
-        "title": "ChatGPT: Refactor selection"
+        "command": "gptcode.findProblems",
+        "title": "gptcode: Find problems"
       },
       {
-        "command": "chatgpt.findProblems",
-        "title": "ChatGPT: Find problems"
+        "command": "gptcode.optimize",
+        "title": "gptcode: Optimize selection"
       },
       {
-        "command": "chatgpt.optimize",
-        "title": "ChatGPT: Optimize selection"
+        "command": "gptcode.conversationId",
+        "title": "Set gptcode conversation ID"
       },
       {
-        "command": "chatgpt.conversationId",
-        "title": "Set ChatGPT conversation ID"
-      },
-      {
-        "command": "chatgpt.resetConversation",
-        "title": "Reset ChatGPT conversation"
+        "command": "gptcode.resetConversation",
+        "title": "Reset gptcode conversation"
       }
     ],
     "menus": {
       "editor/context": [
         {
-          "command": "chatgpt.ask",
+          "command": "gptcode.ask",
           "when": "editorTextFocus",
-          "group": "chatgpt-menu-group@1"
+          "group": "gptcode-menu-group@1"
         },
         {
-          "command": "chatgpt.explain",
+          "command": "gptcode.explain",
           "when": "editorHasSelection",
-          "group": "chatgpt-menu-group@2"
+          "group": "gptcode-menu-group@2"
         },
         {
-          "command": "chatgpt.refactor",
+          "command": "gptcode.refactor",
           "when": "editorHasSelection",
-          "group": "chatgpt-menu-group@3"
+          "group": "gptcode-menu-group@3"
+        },
+
+        {
+          "command": "gptcode.replaceSelectedDescription",
+          "when": "editorHasSelection",
+          "group": "gptcode-menu-group@3"
+        },        {
+          "command": "gptcode.writeTest",
+          "when": "editorHasSelection",
+          "group": "gptcode-menu-group@3"
         },
         {
-          "command": "chatgpt.findProblems",
+          "command": "gptcode.findProblems",
           "when": "editorHasSelection",
-          "group": "chatgpt-menu-group@4"
+          "group": "gptcode-menu-group@4"
         },
         {
-          "command": "chatgpt.optimize",
+          "command": "gptcode.optimize",
           "when": "editorHasSelection",
-          "group": "chatgpt-menu-group@5"
+          "group": "gptcode-menu-group@5"
         }
       ],
       "commandPalette": [
         {
-          "command": "chatgpt.ask"
+          "command": "gptcode.ask"
         },
         {
-          "command": "chatgpt.explain",
+          "command": "gptcode.explain",
           "when": "editorHasSelection"
         },
         {
-          "command": "chatgpt.refactor",
+          "command": "gptcode.refactor",
           "when": "editorHasSelection"
         },
         {
-          "command": "chatgpt.findProblems",
+          "command": "gptcode.findProblems",
           "when": "editorHasSelection"
         },
         {
-          "command": "chatgpt.optimize",
+          "command": "gptcode.optimize",
           "when": "editorHasSelection"
         },
         {
-          "command": "chatgpt.conversationId"
+          "command": "gptcode.conversationId"
         },
         {
-          "command": "chatgpt.resetConversation"
+          "command": "gptcode.resetConversation"
         }
       ]
     },
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "chatgpt",
-          "title": "ChatGPT",
+          "id": "gptcode",
+          "title": "gptcode",
           "icon": "resources/icon.png"
         }
       ]
     },
     "views": {
-      "chatgpt": [
+      "gptcode": [
 				{
 					"type": "webview",
-					"id": "chatgpt.chatView",
-					"name": "ChatGPT"
+					"id": "gptcode.chatView",
+					"name": "gptcode"
 				}
       ]
     },
     "configuration": {
-      "title": "chatGPT",
+      "title": "gptcode",
       "type": "object",
       "properties": {
-        "chatgpt.sessionToken": {
+
+        "gptcode.apiKey": {
           "type": "string",
-          "description": "A session token (`__Secure-next-auth.session-token`) you get when logged into chat.openai.com",
-          "order": 0
+          "default": null,
+          "description": "Your OpenAI API Key"
         },
-        "chatgpt.clearanceToken": {
+        "gptcode.parameters.model": {
           "type": "string",
-          "description": "A clearance token (`cf_clearance`) you get when logged into chat.openai.com",
-          "order": 1
+          "enum": ["text-davinci-003", "text-curie-001", "text-babbage-001", "text-ada-001", "code-davinci-002", "code-cushman-001"],
+          "default": "text-davinci-003",
+          "description": "Model to use for the prompt"
         },
-        "chatgpt.userAgent": {
-          "type": "string",
-          "description": "Your browser's `user-agent` header from any request when logged into chat.openai.com",
-          "order": 1
+        "gptcode.parameters.suffix": {
+          "type": ["string", "null"],
+          "default": null,
+          "description": "The suffix that comes after a completion of inserted text."
         },
-        "chatgpt.pasteOnClick": {
+        "gptcode.parameters.max_tokens": {
+          "type": "integer",
+          "default": 16,
+          "description": "The maximum number of tokens to generate in the completion."
+        },
+        "gptcode.parameters.temperature": {
+          "type": "number",
+          "default": 1,
+          "description": "What sampling temperature to use. Higher values means the model will take more risks."
+        },
+        "gptcode.parameters.top_p": {
+          "type": "number",
+          "default": 1,
+          "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass."
+        },
+        "gptcode.parameters.n": {
+          "type": "integer",
+          "default": 1,
+          "description": "How many completions to generate for each prompt."
+        },
+        "gptcode.parameters.stream": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to stream back partial progress. If set, tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a data: [DONE] message."
+        },
+        "gptcode.parameters.logprobs": {
+          "type": ["integer", "null"],
+          "default": null,
+          "description": "Include the log probabilities on the logprobs most likely tokens, as well the chosen tokens."
+        },
+        "gptcode.parameters.echo": {
+          "type": "boolean",
+          "default": false,
+          "description": "Echo back the prompt in addition to the completion"
+        },
+        "gptcode.parameters.stop": {
+          "type": ["string", "array", "null"],
+          "default": null,
+          "maxItems": 4,
+          "description": "Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence."
+        },
+        "gptcode.parameters.presence_penalty": {
+          "type": "number",
+          "default": 0,
+          "minimum": -2.0,
+          "maximum": 2.0,
+          "description": "Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics."
+        },
+        "gptcode.parameters.frequency_penalty": {
+          "type": "number",
+          "default": 0,
+          "minimum": -2.0,
+          "maximum": 2.0,
+          "description": "Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim."
+        },
+        "gptcode.parameters.best_of": {
+          "type": "integer",
+          "default": 1,
+          "description": "Generates best_of completions server-side and returns the 'best' (the one with the highest log probability per token). Results cannot be streamed."
+        },
+        "gptcode.parameters.logit_bias": {
+          "type": ["object", "null"],
+          "default": null,
+          "description": "Modify the likelihood of specified tokens appearing in the completion."
+        },
+        "gptcode.pasteOnClick": {
           "type": "boolean",
           "default": true,
           "description": "Paste the code from a codeblock inside the response into the editor when you click on it",
           "order": 2
         },
-        "chatgpt.promptPrefix.explain": {
+        "gptcode.promptPrefix.explain": {
           "type": "string",
           "default": "Explain what this code does: ",
           "description": "The prompt prefix used for explaining the selected code",
           "order": 3
         },
-        "chatgpt.promptPrefix.refactor": {
+        "gptcode.promptPrefix.refactor": {
           "type": "string",
           "default": "Refactor this code and explain what's changed: ",
           "description": "The prompt prefix used for refactoring the selected code",
           "order": 4
         },
-        "chatgpt.promptPrefix.findProblems": {
+        "gptcode.promptPrefix.findProblems": {
           "type": "string",
           "default": "Find problems with the following code, fix them and explain what was wrong (Do not change anything else): ",
           "description": "The prompt prefix used for finding problems in the selected code",
           "order": 5
         },
-        "chatgpt.promptPrefix.optimize": {
+        "gptcode.promptPrefix.optimize": {
           "type": "string",
           "default": "Optimize the following code: ",
           "description": "The prompt prefix used for optimizing the selected code",
           "order": 6
         },
-        "chatgpt.keepConversation": {
+
+        "gptcode.promptPrefix.replaceSelectedDescription": {
+          "type": "string",
+          "default": "Write code for following description: ",
+          "description": "The prompt prefix used for refactoring the selected code",
+          "order": 7
+        },
+        "gptcode.promptPrefix.writeTest": {
+          "type": "string",
+          "default": "Write javascript test for following code: ",
+          "description": "The prompt prefix used for refactoring the selected code",
+          "order": 8
+        },
+
+        "gptcode.keepConversation": {
           "type": "boolean",
           "default": true,
           "description": "Keep the conversation going by using the same conversation ID for all requests (allows follow-up questions)",
-          "order": 7
-        },"chatgpt.timeoutLength": {
+          "order": 9
+        },"gptcode.timeoutLength": {
           "type": "number",
           "default": "120",
           "description": "How long should the request wait for a response before timing out (in seconds)",
-          "order": 8
+          "order": 10
         },
-        "chatgpt.selectedInsideCodeblock": {
+        "gptcode.selectedInsideCodeblock": {
           "type": "boolean",
           "default": true,
           "description": "Append selected code as a codeblock (```...code...```) instead of plain text",
-          "order": 9
+          "order": 11
         }
+
       }
     }
   },
@@ -238,6 +343,7 @@
     "webpack-cli": "^5.0.0"
   },
   "dependencies": {
-    "chatgpt": "^2.1.1"
+    "markdown-it": "^13.0.1",
+    "openai": "^3.1.0"
   }
 }
